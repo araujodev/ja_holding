@@ -4,6 +4,7 @@ import { userDefaultPass } from 'src/users/constants/user.businessrule';
 import { User } from 'src/users/entities/user.entity';
 import { MessageHelper } from 'src/users/helpers/message.helper';
 import { Repository } from 'typeorm';
+import { v4 as uuid } from 'uuid';
 
 interface ICreateUser {
   name: string;
@@ -29,6 +30,7 @@ export class CreateUserUseCase {
 
     const passwordForTransform = userParams.password ?? userDefaultPass;
     const user = {
+      id: uuid(),
       name: userParams.name,
       username: userParams.username,
       password: await hashPasswordTransform.to(passwordForTransform),
