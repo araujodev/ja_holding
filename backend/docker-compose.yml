@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  dev:
+    container_name: project_api
+    image: project_api:1.0.0
+    build:
+      context: .
+      target: development
+      dockerfile: ./Dockerfile
+    command: npm run start:debug
+    ports:
+      - 3000:3000
+      - 9229:9229
+    networks:
+      - project-crud-network
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - project_postgres
+    restart: unless-stopped
+  project_postgres:
+    image: postgres
+    container_name: project_postgres
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    restart: always
+    volumes:
+      - /data/postgres:/var/lib/postgresql/data
+    networks:
+      - project-crud-network
+  project_pgadmin:
+    links:
+      - project_postgres:postgres
+    container_name: project_pgadmin
+    image: dpage/pgadmin4
+    ports:
+      - "8000:80"
+    env_file:
+      - .env
+    restart: always
+    volumes:
+      - /data/pgadmin:/root/.pgadmin
+    networks:
+      - project-crud-network
+
+volumes:
+  cache:
+    driver: local
+
+networks:
+  project-crud-network:
