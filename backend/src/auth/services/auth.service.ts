@@ -1,6 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { UsersService } from 'src/users/services/users.service';
+import { hashPasswordTransform } from 'src/common/helpers/crypto';
+import { User } from 'src/users/entities/user.entity';
+import { Repository } from 'typeorm';
 
 interface IResponseLogin {
   access_token: string;
@@ -9,13 +11,14 @@ interface IResponseLogin {
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly usersService: UsersService,
+    @Inject('USER_REPOSITORY')
+    private readonly userRepository: Repository<User>,
     private readonly jwtService: JwtService,
   ) {}
 
   async validateUser(username: string, pass: string): Promise<any> {
-    const user = await this.usersService.findOne(username);
-    if (user && user.password === pass) {
+    const user = await this.userRepository.findOne({ where: { username } });
+    if (user && (await hashPasswordTransform.compare(pass, user.password))) {
       delete user.password;
       return user;
     }

@@ -10,6 +10,10 @@ Construído sob o framework NestJS, Docker, Postgres e PgAdmin.
 $ npm install
 ```
 
+## Configuração do Banco de dados
+Em `./database.providers.ts` pode-se alterar as configurações do banco de dados. 
+Caso a base de dados default `base_project` não exista, será necessário sua criação.
+
 ## Rodando a aplicação `com` Docker
 
 ```bash
