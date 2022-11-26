@@ -9,6 +9,8 @@ import { GetProjectController } from './usecases/getProject/get-project.controll
 import { GetProjectUseCase } from './usecases/getProject/get-project.usecase';
 import { ListProjectsController } from './usecases/list/list.controller';
 import { ListProjectsUseCase } from './usecases/list/list.usecase';
+import { UpdateProjectController } from './usecases/update/update.controller';
+import { UpdateProjectUseCase } from './usecases/update/update.usecase';
 
 @Module({
   imports: [DatabaseModule, CommonModule],
@@ -18,11 +20,13 @@ import { ListProjectsUseCase } from './usecases/list/list.usecase';
     CreateProjectUseCase,
     ListProjectsUseCase,
     GetProjectUseCase,
+    UpdateProjectUseCase,
   ],
   controllers: [
     CreateProjectController,
     ListProjectsController,
     GetProjectController,
+    UpdateProjectController,
   ],
 })
 export class ProjectsModule {}

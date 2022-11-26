@@ -35,7 +35,6 @@ export class CreateProjectController {
         username: headers.username ?? req.user.username,
       });
     } catch (err) {
-      console.log(err);
       throw new HttpException(err.message, HttpStatus.BAD_REQUEST);
     }
   }
