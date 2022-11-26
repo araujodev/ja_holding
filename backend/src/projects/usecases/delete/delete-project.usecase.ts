@@ -5,25 +5,13 @@ import { MessageHelper as UserMessageHelper } from 'src/users/helpers/message.he
 import { User } from 'src/users/entities/user.entity';
 import { Repository } from 'typeorm';
 
-interface IChangeStatusRequest {
+interface IDeleteRequest {
   username: string;
   id: string;
 }
 
-export interface ICustomProjectResponse {
-  id: string;
-  title: string;
-  zip_code: number;
-  cost: number;
-  done: boolean;
-  deadline: string;
-  userId: string;
-  created_at: string;
-  updated_at: string;
-}
-
 Injectable();
-export class ChangeProjectStatusUseCase {
+export class DeleteProjectUseCase {
   constructor(
     @Inject('PROJECT_REPOSITORY')
     private projectRepository: Repository<Project>,
@@ -31,9 +19,7 @@ export class ChangeProjectStatusUseCase {
     private userRepository: Repository<User>,
   ) {}
 
-  async execute(
-    projectParams: IChangeStatusRequest,
-  ): Promise<ICustomProjectResponse> {
+  async execute(projectParams: IDeleteRequest): Promise<void> {
     const userExists = await this.userRepository.findOne({
       where: { username: projectParams.username },
     });
@@ -54,19 +40,6 @@ export class ChangeProjectStatusUseCase {
       throw new Error(MessageHelper.PROJECT_INVALID_OWNER);
     }
 
-    project.done = true;
-    await this.projectRepository.save(project);
-
-    return {
-      id: project.id,
-      title: project.title,
-      zip_code: project.zip_code,
-      cost: project.cost,
-      done: project.done,
-      deadline: project.deadline,
-      userId: project.userId,
-      created_at: project.created_at,
-      updated_at: project.updated_at,
-    } as ICustomProjectResponse;
+    await this.projectRepository.remove(project);
   }
 }

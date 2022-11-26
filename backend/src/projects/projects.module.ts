@@ -7,6 +7,8 @@ import { ChangeStatusProjectController } from './usecases/changeStatus/change-st
 import { ChangeProjectStatusUseCase } from './usecases/changeStatus/change-status-project.usecase';
 import { CreateProjectController } from './usecases/create/create.controller';
 import { CreateProjectUseCase } from './usecases/create/create.usecase';
+import { DeleteProjectController } from './usecases/delete/delete-project.controller';
+import { DeleteProjectUseCase } from './usecases/delete/delete-project.usecase';
 import { GetProjectController } from './usecases/getProject/get-project.controller';
 import { GetProjectUseCase } from './usecases/getProject/get-project.usecase';
 import { ListProjectsController } from './usecases/list/list.controller';
@@ -24,6 +26,7 @@ import { UpdateProjectUseCase } from './usecases/update/update.usecase';
     GetProjectUseCase,
     UpdateProjectUseCase,
     ChangeProjectStatusUseCase,
+    DeleteProjectUseCase,
   ],
   controllers: [
     CreateProjectController,
@@ -31,6 +34,7 @@ import { UpdateProjectUseCase } from './usecases/update/update.usecase';
     GetProjectController,
     UpdateProjectController,
     ChangeStatusProjectController,
+    DeleteProjectController,
   ],
 })
 export class ProjectsModule {}
