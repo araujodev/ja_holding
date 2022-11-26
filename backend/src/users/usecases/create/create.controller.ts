@@ -9,11 +9,11 @@ import { CreateUserDto } from 'src/users/dtos/create-user.dto';
 import { CreateUserUseCase } from './create.usecase';
 
 @Controller('users')
-export class CreateController {
+export class CreateUserController {
   constructor(private readonly useCase: CreateUserUseCase) {}
 
   @Post()
-  async getProfile(@Body() createUserDto: CreateUserDto) {
+  async createUser(@Body() createUserDto: CreateUserDto) {
     try {
       return await this.useCase.execute({
         name: createUserDto.name,

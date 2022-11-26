@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from 'src/database.module';
-import { CreateController } from './usecases/create/create.controller';
+import { CreateUserController } from './usecases/create/create.controller';
 import { CreateUserUseCase } from './usecases/create/create.usecase';
 import { MeController } from './usecases/me/me.controller';
 import { userProviders } from './user.providers';
@@ -8,6 +8,6 @@ import { userProviders } from './user.providers';
 @Module({
   imports: [DatabaseModule],
   providers: [...userProviders, CreateUserUseCase],
-  controllers: [MeController, CreateController],
+  controllers: [MeController, CreateUserController],
 })
 export class UsersModule {}
