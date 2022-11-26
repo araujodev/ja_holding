@@ -4,10 +4,18 @@ Destinado a gerenciar requisições e comunicar com o banco de dados em PostgreS
 
 Construído sob o framework NestJS, Docker, Postgres e PgAdmin.
 
+## Documentação 
+
+Documentação Postman collection: https://documenter.getpostman.com/view/6630459/2s8YsuvByQ
+
 ## Instalação
 
 ```bash
 $ npm install
+```
+
+```bash
+$ cp .env.example .env
 ```
 
 ## Configuração do Banco de dados
