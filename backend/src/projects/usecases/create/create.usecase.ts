@@ -31,7 +31,7 @@ export class CreateProjectUseCase {
     @Inject('USER_REPOSITORY')
     private userRepository: Repository<User>,
     @Inject('PROJECT_REPOSITORY')
-    private projectRepository: Repository<User>,
+    private projectRepository: Repository<Project>,
   ) {}
 
   async execute(projectParams: IProjectCreate) {
