@@ -3,6 +3,8 @@ import { CommonModule } from 'src/common/common.module';
 import { DatabaseModule } from 'src/database.module';
 import { userProviders } from 'src/users/user.providers';
 import { projectProviders } from './project.providers';
+import { ChangeStatusProjectController } from './usecases/changeStatus/change-status-project.controller';
+import { ChangeProjectStatusUseCase } from './usecases/changeStatus/change-status-project.usecase';
 import { CreateProjectController } from './usecases/create/create.controller';
 import { CreateProjectUseCase } from './usecases/create/create.usecase';
 import { GetProjectController } from './usecases/getProject/get-project.controller';
@@ -21,12 +23,14 @@ import { UpdateProjectUseCase } from './usecases/update/update.usecase';
     ListProjectsUseCase,
     GetProjectUseCase,
     UpdateProjectUseCase,
+    ChangeProjectStatusUseCase,
   ],
   controllers: [
     CreateProjectController,
     ListProjectsController,
     GetProjectController,
     UpdateProjectController,
+    ChangeStatusProjectController,
   ],
 })
 export class ProjectsModule {}
