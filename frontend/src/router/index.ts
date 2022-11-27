@@ -4,6 +4,7 @@ import HomeView from "../views/HomeView.vue";
 import SignUpView from "../views/SignUpView.vue";
 import DashboardView from "../views/DashboardView.vue";
 import ProjectsCreateView from "../views/ProjectsCreateView.vue";
+import ProjectsUpdateView from "../views/ProjectsUpdateView.vue";
 
 Vue.use(VueRouter);
 
@@ -27,6 +28,11 @@ const routes: Array<RouteConfig> = [
     path: "/projects/create",
     name: "create-project",
     component: ProjectsCreateView,
+  },
+  {
+    path: "/projects/update",
+    name: "update-project",
+    component: ProjectsUpdateView,
   },
 ];
 

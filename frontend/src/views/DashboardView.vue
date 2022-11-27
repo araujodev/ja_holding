@@ -9,6 +9,7 @@
         :items="projects"
         item-key="id"
         class="elevation-1"
+        @click:row="handleClick"
       >
       </v-data-table>
     </div>
@@ -50,6 +51,12 @@ export default Vue.extend({
     this.loadProjects();
   },
   methods: {
+    async handleClick(row: any): Promise<void> {
+      this.$router.push({
+        name: "update-project",
+        params: row,
+      });
+    },
     async loadProjects(): Promise<void> {
       const userInfo = JSON.parse(localStorage.getItem("user-info") ?? "");
 

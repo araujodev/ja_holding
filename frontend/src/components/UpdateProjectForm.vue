@@ -5,33 +5,33 @@
         <v-flex xs12 sm8 md3>
           <v-card class="card-login" color="#eee">
             <v-toolbar-title class="text-center mb-12 mt-6"
-              >Criar Novo Projeto</v-toolbar-title
+              >Atualizar Projeto</v-toolbar-title
             >
             <v-card-text>
               <v-form>
                 <v-text-field
-                  v-model="title"
+                  v-model="titleValue"
                   label="Titulo do projeto"
                   outlined
                   background-color="white"
                 >
                 </v-text-field>
                 <v-text-field
-                  v-model="zip_code"
+                  v-model="zipCodeValue"
                   label="Zip Code"
                   outlined
                   background-color="white"
                 >
                 </v-text-field>
                 <v-text-field
-                  v-model="cost"
+                  v-model="costValue"
                   label=" Custo (R$)"
                   outlined
                   background-color="white"
                 >
                 </v-text-field>
                 <v-text-field
-                  v-model="deadline"
+                  v-model="deadlineValue"
                   label=" Deadline"
                   outlined
                   background-color="white"
@@ -49,7 +49,7 @@
                 class="button-login white--text mb-6"
                 :loading="isLoading"
                 @click="create"
-                >Criar Novo Projeto
+                >Atualizar Projeto
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -64,28 +64,34 @@ import Vue from "vue";
 import axios from "axios";
 
 export default Vue.extend({
-  name: "CreateProjectForm",
+  name: "UpdateProjectForm",
 
-  data: () => ({
-    title: "",
-    cost: "",
-    deadline: "",
-    zip_code: "",
-    showError: false,
-    errorMessage: "",
-    isLoading: false,
-  }),
+  props: ["id", "title", "cost", "deadline", "zipCode"],
+
+  data: function () {
+    return {
+      showError: false,
+      errorMessage: "",
+      isLoading: false,
+      titleValue: this.title,
+      idValue: this.id,
+      costValue: this.cost,
+      deadlineValue: this.deadline,
+      zipCodeValue: this.zipCode,
+    };
+  },
+
   methods: {
     async create(): Promise<void> {
       const userInfo = JSON.parse(localStorage.getItem("user-info") ?? "");
       axios
-        .post(
-          "projects",
+        .put(
+          `projects/${this.idValue}`,
           {
-            title: this.title,
-            cost: Number(this.cost),
-            deadline: this.deadline,
-            zip_code: Number(this.zip_code),
+            title: this.titleValue,
+            cost: Number(this.costValue),
+            deadline: this.deadlineValue,
+            zip_code: Number(this.zipCodeValue),
           },
           {
             headers: {
@@ -101,7 +107,7 @@ export default Vue.extend({
         .catch(() => {
           this.isLoading = false;
           this.showError = false;
-          this.errorMessage = "Ocororeu um erro ao cadastrar o projeto.";
+          this.errorMessage = "Ocororeu um erro ao atualizar o projeto.";
           this.showError = true;
         });
 
