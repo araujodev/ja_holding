@@ -74,8 +74,6 @@ export default Vue.extend({
       }
       this.isLoading = true;
 
-      console.log(process.env.VUE_APP_BASE_API_UR);
-
       axios
         .post("auth/login", {
           username: this.username,
