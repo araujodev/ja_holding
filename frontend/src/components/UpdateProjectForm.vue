@@ -4,7 +4,7 @@
       <v-layout align-center justify-center v-on:keyup.enter="create">
         <v-flex xs12 sm8 md3>
           <v-card class="card-login" color="#eee">
-            <v-toolbar-title class="text-center mb-12 mt-6"
+            <v-toolbar-title class="text-center mb-12 mt-2"
               >Atualizar Projeto</v-toolbar-title
             >
             <v-card-text>
@@ -50,6 +50,26 @@
                 :loading="isLoading"
                 @click="create"
                 >Atualizar Projeto
+              </v-btn>
+            </v-card-actions>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                color="#1976d2"
+                class="button-login white--text mb-6"
+                :loading="isLoading"
+                @click="makeDone"
+                >Finalizar Projeto (done)
+              </v-btn>
+            </v-card-actions>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                color="#a90f0f"
+                class="button-login white--text mb-6"
+                :loading="isLoading"
+                @click="deleteProject"
+                >Remover Projeto
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -108,6 +128,54 @@ export default Vue.extend({
           this.isLoading = false;
           this.showError = false;
           this.errorMessage = "Ocororeu um erro ao atualizar o projeto.";
+          this.showError = true;
+        });
+
+      return;
+    },
+    async makeDone(): Promise<void> {
+      const userInfo = JSON.parse(localStorage.getItem("user-info") ?? "");
+      axios
+        .patch(
+          `projects/${this.idValue}/done`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${userInfo.access_token}`,
+              username: userInfo.username,
+            },
+          }
+        )
+        .then(() => {
+          this.isLoading = true;
+          this.$router.push("/dashboard");
+        })
+        .catch(() => {
+          this.isLoading = false;
+          this.showError = false;
+          this.errorMessage = "Ocororeu um erro ao completar o projeto.";
+          this.showError = true;
+        });
+
+      return;
+    },
+    async deleteProject(): Promise<void> {
+      const userInfo = JSON.parse(localStorage.getItem("user-info") ?? "");
+      axios
+        .delete(`projects/${this.idValue}`, {
+          headers: {
+            Authorization: `Bearer ${userInfo.access_token}`,
+            username: userInfo.username,
+          },
+        })
+        .then(() => {
+          this.isLoading = true;
+          this.$router.push("/dashboard");
+        })
+        .catch(() => {
+          this.isLoading = false;
+          this.showError = false;
+          this.errorMessage = "Ocororeu um erro ao deletars o projeto.";
           this.showError = true;
         });
 
