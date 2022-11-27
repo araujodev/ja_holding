@@ -1,16 +1,16 @@
 <template>
-  <login-form />
+  <register-form />
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import LoginForm from "../components/LoginForm.vue";
+import RegisterForm from "../components/RegisterForm.vue";
 
 export default Vue.extend({
-  name: "HomeView",
+  name: "SignUpView",
 
   components: {
-    LoginForm,
+    RegisterForm,
   },
 });
 </script>
