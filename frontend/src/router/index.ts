@@ -3,6 +3,7 @@ import VueRouter, { RouteConfig } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import SignUpView from "../views/SignUpView.vue";
 import DashboardView from "../views/DashboardView.vue";
+import ProjectsCreateView from "../views/ProjectsCreateView.vue";
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,11 @@ const routes: Array<RouteConfig> = [
     path: "/dashboard",
     name: "dashboard",
     component: DashboardView,
+  },
+  {
+    path: "/projects/create",
+    name: "create-project",
+    component: ProjectsCreateView,
   },
 ];
 
