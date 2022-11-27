@@ -8,6 +8,7 @@ do teste proposto como Desafio técnico – nível pleno da empresa J&A Holding.
 
 Este projeto está organizado em dois grandes directorios:
 - Backend - responsável por ser a API da aplicação, gerenciar dados e atendem as requisições.
+  - Postman Documentação: https://documenter.getpostman.com/view/6630459/2s8YsuvByQ
 - Frontend - responsável por apresentar os componentes e fornecer a interface gráfica para a manipulação dos dados. 
   - Figma link: https://www.figma.com/file/VIm2EloRWwOVwEkLNTIxMI/Untitled?node-id=0%3A1&t=LSkmbyTBw3Rl1Uv0-1
 
